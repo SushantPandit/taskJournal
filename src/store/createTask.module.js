@@ -27,13 +27,7 @@ export const createTask = {
       state.taskData = args;
       commit("getKey");
       console.log(state.key);
-
-      taskService.create(args,state.key).then(res=>{
-          console.log(res);
-      }).catch(err=>{
-        console.log(err);
-      })
-
+      taskService.create(args,state.key);
     }
   }
 

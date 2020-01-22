@@ -1,8 +1,15 @@
 <template>
     <div class="createtask container">
-        <div class="title">
-            <p class="h2">Create Task</p>
-        </div>
+        <!-- <b-container fluid class="bv-example-row bg-light">
+            <b-row class="d-flex pt-3">
+                <div class="h1 pr-2">
+                    <b-icon icon="arrow-left-short" class="border border-info rounded-lg" v-on:click="route"></b-icon>
+                </div>
+                <div class="pl-2">
+                    <p class="h2">Create Task</p>
+                </div>
+            </b-row>
+        </b-container> -->
         <b-form @submit="onSubmit" @reset="onReset" v-if="show">
             <b-row>
                 <b-col>
@@ -44,77 +51,84 @@
             <b-button type="submit" variant="info">Create</b-button>
             <b-button type="reset" variant="info">Clear</b-button>
         </b-form>
-        <!-- <b-card class="mt-3" header="Form Data Result">
-                        <pre class="m-0">{{ form }}</pre>
-                    </b-card> -->
+
     </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-export default {
-    name: "CreateTask",
-    data() {
-        return {
-            form: {
-                createionDate: "",
-                dueDate: "",
-                description: "",
-                type: null,
-                comments: []
-            },
-            types: [
-                { text: "Select One", value: null },
-                "Project",
-                "Family",
-                "Personal",
-                "Friends"
-            ],
-            createionDate:'',
-            dueDate:'',
-            comment: '',
-            show: true
-        };
-    },
-    methods: {
-        ...mapActions(['createTask']),
-        onSubmit(evt) {
-            evt.preventDefault();
-            if (this.comment !== '') {
-                this.form.comments.push(this.comment);
-            }
-            if (this.createionDate && this.dueDate) {
-                this.form.createionDate = this.formateDate(this.createionDate);
-                this.form.dueDate = this.formateDate(this.dueDate);
-            }
+import { mapActions } from "vuex";
 
-            this.createTask(this.form);
-            // alert(JSON.stringify(this.form));
-        },
-        onReset(evt) {
-            evt.preventDefault();
-            // Reset our form values
-            this.form.createionDate = "";
-            this.form.dueDate = "";
-            this.form.description = null;
-            this.form.type = null;
-            this.form.comments = [];
-            this.createionDate = "";
-            this.dueDate = "";
-            // Trick to reset/clear native browser form validation state
-            this.show = false;
-            this.$nextTick(() => {
-                this.show = true;
-            });
-        },
-        formateDate(arg) {
-            let date = new Date(arg);
-            return date;
-        }
+export default {
+  name: "CreateTask",
+  data() {
+    return {
+      form: {
+        createionDate: "",
+        dueDate: "",
+        description: "",
+        type: null,
+        comments: []
+      },
+      types: [
+        { text: "Select One", value: null },
+        "Project",
+        "Family",
+        "Personal",
+        "Friends"
+      ],
+      createionDate: "",
+      dueDate: "",
+      comment: "",
+      show: true
+    };
+  },
+  methods: {
+    ...mapActions(["createTask"]),
+    onSubmit(evt) {
+      this.form.comments = [];
+      evt.preventDefault();
+      if (this.comment !== "") {
+        this.form.comments.push(this.comment);
+      }
+      if (this.createionDate && this.dueDate) {
+        this.form.createionDate = this.formateDate(this.createionDate);
+        this.form.dueDate = this.formateDate(this.dueDate);
+      }
+      let form = this.form;
+      this.createTask(form);
+      // this.reset();
+    },
+    onReset(evt) {
+      evt.preventDefault();
+      // Reset our form values
+      this.reset();
+    },
+    formateDate(arg) {
+      let date = new Date(arg);
+      return date;
+    },
+    reset() {
+      this.form.createionDate = "";
+      this.form.dueDate = "";
+      this.form.description = null;
+      this.form.type = null;
+      this.form.comments = [];
+      this.createionDate = "";
+      this.dueDate = "";
+      this.comment = "";
+      // Trick to reset/clear native browser form validation state
+      this.show = false;
+      this.$nextTick(() => {
+        this.show = true;
+      });
+    },
+    route() {
+      console.log("hit");
+      this.$router.push("/");
     }
+  }
 };
 </script>
 
 <style scoped>
-
 </style>

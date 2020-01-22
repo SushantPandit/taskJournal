@@ -14,9 +14,24 @@ function getTasks(key) {
 }
 
 function create(taskInfo, key) {
-  console.log('hit')
+  // console.log('hit')
   return axios
-    .post('http://localhost:3000/task/12008',{
-      key
+    .get('http://localhost:3000/task/' + key)
+    .then(res => {
+      // console.log(res);
+      let data = res.data.tasks;
+      data.push(taskInfo);
+      return axios
+        .put('http://localhost:3000/task/' + key, {
+          tasks: data
+        })
+    })
+    .catch(res => {
+      // console.log("create data");
+      return axios
+        .post('http://localhost:3000/task/', {
+          id: key,
+          tasks: [taskInfo]
+        })
     })
 }
