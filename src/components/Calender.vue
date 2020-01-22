@@ -1,13 +1,13 @@
 <template>
     <div class="calender">
         <b-container fluid class="bv-example-row bg-light">
-            <b-row class="d-flex justify-content-between">
+            <b-row class="d-flex justify-content-between pt-3">
                 <div class="pl-2">
                     <!-- <img src="" alt="image"> -->
                     <p class="h2">Task</p>
                 </div>
                 <div class="h1 pr-2">
-                    <b-icon icon="list" v-on:click="route"></b-icon>
+                    <b-icon icon="plus" class="border border-info rounded-lg" v-b-modal.modal-1>Create</b-icon>
                 </div>
             </b-row>
         </b-container>
@@ -25,20 +25,31 @@
         </b-container>
         <b-container class="d-flex flex-wrap justify-content-start pl-5" style="width:100%">
             <div v-for="task of getTasks" v-bind:key="task.id" class="m-2">
-                <b-card :title=task.type style="width:20rem" tag="article" class="mb-2">
+                <b-card style="width:20rem" tag="article" class="mb-2">
                     <div class="">
-                        <div class="mb-2">
-                            <!-- <span class="" >Description: </span> -->
-                            <span class="h6">{{task.details}}</span>
+                        <div class="mb-2 d-flex justify-content-between">
+                            <span class="h4">{{task.type}}</span>
+                            <b-icon icon="arrows-angle-expand" variant="danger" class="expand" font-scale="1.2"></b-icon>
                         </div>
-                        <div class="">
-                            <p class="mb-0">Created :</p>
-                            <p class=""> {{currentDate | moment("MMMM Do YYYY,dddd")}}</p>
-                            <p class="mb-0">Due Date:</p>
-                            <p class=""> {{task.dueDate}}</p>
+                        <div class="mb-2">
+                            <span class="h5 text-info">{{task.description}}</span>
+                        </div>
+                        <div class="d-flex">
+                            <div class="text-left">
+                                <p class="mb-0 font-weight-bold">Created</p>
+                                <p class=""> {{currentDate | moment("MMMM Do YYYY,dddd")}}</p>
+                                <!-- <p class="mb-0 font-weight-bold">Due Date:</p> -->
+                                <!-- <p class=""> {{task.dueDate | moment("MMMM Do YYYY,ddd")}}</p> -->
+                            </div>
+                            <div class="text-right">
+                                <!-- <p class="mb-0 font-weight-bold">Created :</p> -->
+                                <!-- <p class=""> {{currentDate | moment("MMMM Do YYYY,ddd")}}</p> -->
+                                <p class="mb-0 font-weight-bold">Due Date</p>
+                                <p class=""> {{task.dueDate | moment("MMMM Do YYYY,dddd")}}</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="mt-4">
+                    <div class="mt-2 d-flex">
                         <b-icon icon="check" class="border border-info rounded ml-2" font-scale="2"></b-icon>
                         <b-icon icon="document-text" class="border border-info rounded ml-2" font-scale="2"></b-icon>
                         <b-icon icon="window" class="border border-info rounded ml-2" font-scale="2"></b-icon>
@@ -46,11 +57,16 @@
                 </b-card>
             </div>
         </b-container>
+        <b-modal id="modal-1" title="Create Task" hide-footer>
+            <create-task/>
+        </b-modal>
     </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import CreateTask from "./CreateTask";
+
 
 export default {
     name: "Calender",
@@ -59,6 +75,9 @@ export default {
             currentDate: "",
             taskList: {}
         };
+    },
+    components: {
+        CreateTask
     },
 
     methods: {
@@ -94,5 +113,9 @@ export default {
 </script>
 
 <style>
-
+.expand{
+    position: relative;
+    top: -17px;
+    right: -17px;
+}
 </style>
