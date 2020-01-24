@@ -7,7 +7,7 @@
                     <p class="h2">Task</p>
                 </div>
                 <div class="h1 pr-2">
-                    <b-icon icon="plus" class="border border-info rounded-lg" v-b-modal.modal-1>Create</b-icon>
+                    <b-icon icon="plus" class="border border-info rounded-lg" v-b-modal.create>Create</b-icon>
                 </div>
             </b-row>
         </b-container>
@@ -24,7 +24,7 @@
             </div>
         </b-container>
         <b-container class="d-flex flex-wrap justify-content-start pl-5" style="width:100%">
-            <div v-for="task of getTasks" v-bind:key="task.id" class="m-2">
+            <div v-for="(task,i) of getTasks" v-bind:key="i" class="m-2">
                 <b-card style="width:20rem" tag="article" class="mb-2">
                     <div class="">
                         <div class="mb-2 d-flex justify-content-between">
@@ -50,34 +50,40 @@
                         </div>
                     </div>
                     <div class="mt-2 d-flex">
-                        <b-icon icon="check" class="border border-info rounded ml-2" font-scale="2"></b-icon>
+                        <b-icon icon="check" class="border border-info rounded ml-2" v-on:click="onUpdate(i)" font-scale="2" ></b-icon>
                         <b-icon icon="document-text" class="border border-info rounded ml-2" font-scale="2"></b-icon>
                         <b-icon icon="window" class="border border-info rounded ml-2" font-scale="2"></b-icon>
                     </div>
                 </b-card>
             </div>
         </b-container>
-        <b-modal id="modal-1" title="Create Task" hide-footer>
+        <b-modal id="create" title="Create Task" hide-footer>
             <create-task/>
         </b-modal>
+        <b-modal id="update" title="Update Task" hide-footer>
+            <update-task :updateRecord="data" />
+        </b-modal>
+    
     </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
 import CreateTask from "./CreateTask";
-
+import UpdateTask from "./UpdateTask";
 
 export default {
     name: "Calender",
     data: () => {
         return {
             currentDate: "",
-            taskList: {}
+            taskList: {},
+            data: ""
         };
     },
     components: {
-        CreateTask
+        CreateTask,
+        UpdateTask
     },
 
     methods: {
@@ -94,8 +100,17 @@ export default {
             // console.log(this.getTasks);
         },
         route() {
-            console.log('hit');
-            this.$router.push('/CreateTask');
+            console.log("hit");
+            this.$router.push("/CreateTask");
+        },
+        onUpdate(index) {
+            console.log(index);
+            this.data ={
+                index:index,
+                getTasks:this.getTasks
+            } 
+            this.$bvModal.show('update');
+            // this.$refs['update'].show()
         }
     },
 
@@ -113,7 +128,7 @@ export default {
 </script>
 
 <style>
-.expand{
+.expand {
     position: relative;
     top: -17px;
     right: -17px;
