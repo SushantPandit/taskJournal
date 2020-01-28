@@ -17,95 +17,11 @@
           "description": "testing demo data ",
           "type": "Friends",
           "comments": [
-            "testing demo data "
-          ]
-        },
-        {
-          "createionDate": "2020-01-22T00:00:00.000Z",
-          "dueDate": "2020-01-22T00:00:00.000Z",
-          "description": "testing demo data ",
-          "type": "Friends",
-          "comments": [
-            "testing demo data ",
-            "testing demo data "
-          ]
-        },
-        {
-          "createionDate": "2020-01-22T00:00:00.000Z",
-          "dueDate": "2020-01-22T00:00:00.000Z",
-          "description": "testing demo data ",
-          "type": "Friends",
-          "comments": [
-            "testing demo data ",
-            "testing demo data ",
-            "testing demo data "
-          ]
-        },
-        {
-          "createionDate": "2020-01-22T00:00:00.000Z",
-          "dueDate": "2020-01-22T00:00:00.000Z",
-          "description": "testing demo data ",
-          "type": "Friends",
-          "comments": [
-            "testing demo data ",
-            "testing demo data ",
-            "testing demo data ",
-            "testing demo data "
-          ]
-        },
-        {
-          "createionDate": "2020-01-22T00:00:00.000Z",
-          "dueDate": "2020-01-22T00:00:00.000Z",
-          "description": "testing demo data ",
-          "type": "Friends",
-          "comments": [
             "testing demo data ",
             "testing demo data ",
             "testing demo data ",
             "testing demo data ",
             "testing demo data "
-          ]
-        },
-        {
-          "createionDate": "2020-01-22T00:00:00.000Z",
-          "dueDate": "2020-01-31T00:00:00.000Z",
-          "description": "xyz",
-          "type": "Family",
-          "comments": [
-            "xyz"
-          ]
-        },
-        {
-          "createionDate": "2020-01-22T00:00:00.000Z",
-          "dueDate": "2020-01-31T00:00:00.000Z",
-          "description": "xyz",
-          "type": "Family",
-          "comments": [
-            "xyz",
-            "xyz"
-          ]
-        },
-        {
-          "createionDate": "2020-01-22T00:00:00.000Z",
-          "dueDate": "2020-01-31T00:00:00.000Z",
-          "description": "xyz",
-          "type": "Family",
-          "comments": [
-            "xyz",
-            "xyz",
-            "xyz"
-          ]
-        },
-        {
-          "createionDate": "2020-01-22T00:00:00.000Z",
-          "dueDate": "2020-01-31T00:00:00.000Z",
-          "description": "xyz",
-          "type": "Family",
-          "comments": [
-            "xyz",
-            "xyz",
-            "xyz",
-            "xyz"
           ]
         },
         {
@@ -128,15 +44,6 @@
           "type": "Friends",
           "comments": [
             "xyz"
-          ]
-        },
-        {
-          "createionDate": "2020-01-22T00:00:00.000Z",
-          "dueDate": "2020-01-22T00:00:00.000Z",
-          "description": "testing demo data ",
-          "type": "Family",
-          "comments": [
-            "testing demo data "
           ]
         }
       ],
@@ -203,51 +110,6 @@
           "comments": [
             "create task for sushant"
           ]
-        },
-        {
-          "createionDate": "2020-01-23T00:00:00.000Z",
-          "dueDate": "2020-01-21T00:00:00.000Z",
-          "description": "xyz",
-          "type": "Family",
-          "comments": [
-            "create task for sushant"
-          ]
-        },
-        {
-          "createionDate": "2020-01-23T00:00:00.000Z",
-          "dueDate": "2020-01-21T00:00:00.000Z",
-          "description": "xyz",
-          "type": "Family",
-          "comments": [
-            "create task for sushant"
-          ]
-        },
-        {
-          "createionDate": "2020-01-23T00:00:00.000Z",
-          "dueDate": "2020-01-21T00:00:00.000Z",
-          "description": "xyz",
-          "type": "Family",
-          "comments": [
-            "create task for sushant"
-          ]
-        },
-        {
-          "createionDate": "2020-01-23T00:00:00.000Z",
-          "dueDate": "2020-01-21T00:00:00.000Z",
-          "description": "xyz",
-          "type": "Family",
-          "comments": [
-            "create task for sushant"
-          ]
-        },
-        {
-          "createionDate": "2020-01-23T00:00:00.000Z",
-          "dueDate": "2020-01-21T00:00:00.000Z",
-          "description": "xyz",
-          "type": "Family",
-          "comments": [
-            "create task for sushant"
-          ]
         }
       ],
       "id": "120023"
@@ -283,6 +145,21 @@
         }
       ],
       "id": "120025"
+    },
+    {
+      "tasks": [
+        {
+          "createionDate": "2020-01-28T00:00:00.000Z",
+          "dueDate": "2020-01-29T00:00:00.000Z",
+          "description": "xyz",
+          "type": "Family",
+          "comments": [
+            "xyz"
+          ],
+          "status": "Created"
+        }
+      ],
+      "id": "120028"
     }
   ]
 }

@@ -1,15 +1,15 @@
 <template>
     <div class="createtask container">
         <!-- <b-container fluid class="bv-example-row bg-light">
-            <b-row class="d-flex pt-3">
-                <div class="h1 pr-2">
-                    <b-icon icon="arrow-left-short" class="border border-info rounded-lg" v-on:click="route"></b-icon>
-                </div>
-                <div class="pl-2">
-                    <p class="h2">Create Task</p>
-                </div>
-            </b-row>
-        </b-container> -->
+                <b-row class="d-flex pt-3">
+                    <div class="h1 pr-2">
+                        <b-icon icon="arrow-left-short" class="border border-info rounded-lg" v-on:click="route"></b-icon>
+                    </div>
+                    <div class="pl-2">
+                        <p class="h2">Create Task</p>
+                    </div>
+                </b-row>
+            </b-container> -->
         <b-form @submit="onSubmit" @reset="onReset" v-if="show">
             <b-row>
                 <b-col>
@@ -30,7 +30,9 @@
                     </b-form-group>
                 </b-col>
                 <b-col>
-                    <!-- empty -->
+                    <b-form-group id="input-group-3" label="Task Type:" label-for="input-3">
+                        <b-form-select id="input-3" v-model="form.status" :options="status" required></b-form-select>
+                    </b-form-group>
                 </b-col>
             </b-row>
             <b-row>
@@ -51,7 +53,7 @@
             <b-button type="submit" variant="info">Create</b-button>
             <b-button type="reset" variant="info">Clear</b-button>
         </b-form>
-
+    
     </div>
 </template>
 
@@ -59,76 +61,83 @@
 import { mapActions } from "vuex";
 
 export default {
-  name: "CreateTask",
-  data() {
-    return {
-      form: {
-        createionDate: "",
-        dueDate: "",
-        description: "",
-        type: null,
-        comments: []
-      },
-      types: [
-        { text: "Select One", value: null },
-        "Project",
-        "Family",
-        "Personal",
-        "Friends"
-      ],
-      createionDate: "",
-      dueDate: "",
-      comment: "",
-      show: true
-    };
-  },
-  methods: {
-    ...mapActions(["createTask"]),
-    onSubmit(evt) {
-      this.form.comments = [];
-      evt.preventDefault();
-      if (this.comment !== "") {
-        this.form.comments.push(this.comment);
-      }
-      if (this.createionDate && this.dueDate) {
-        this.form.createionDate = this.formateDate(this.createionDate);
-        this.form.dueDate = this.formateDate(this.dueDate);
-      }
-      let form = this.form;
-      this.createTask(form);
-      // this.reset();
+    name: "CreateTask",
+    data() {
+        return {
+            form: {
+                createionDate: "",
+                dueDate: "",
+                description: "",
+                type: null,
+                comments: [],
+                status: "Created"
+            },
+            types: [
+                { text: "Select One", value: null },
+                "Project",
+                "Family",
+                "Personal",
+                "Friends"
+            ],
+            status: [
+                { text: "Create", value: "Created" },
+                "Pending",
+                "Done"
+            ],
+            createionDate: "",
+            dueDate: "",
+            comment: "",
+            show: true
+        };
     },
-    onReset(evt) {
-      evt.preventDefault();
-      // Reset our form values
-      this.reset();
-    },
-    formateDate(arg) {
-      let date = new Date(arg);
-      return date;
-    },
-    reset() {
-      this.form.createionDate = "";
-      this.form.dueDate = "";
-      this.form.description = null;
-      this.form.type = null;
-      this.form.comments = [];
-      this.createionDate = "";
-      this.dueDate = "";
-      this.comment = "";
-      // Trick to reset/clear native browser form validation state
-      this.show = false;
-      this.$nextTick(() => {
-        this.show = true;
-      });
-    },
-    route() {
-      console.log("hit");
-      this.$router.push("/");
+    methods: {
+        ...mapActions(["createTask"]),
+        onSubmit(evt) {
+            this.form.comments = [];
+            evt.preventDefault();
+            if (this.comment !== "") {
+                this.form.comments.push(this.comment);
+            }
+            if (this.createionDate && this.dueDate) {
+                this.form.createionDate = this.formateDate(this.createionDate);
+                this.form.dueDate = this.formateDate(this.dueDate);
+            }
+            let form = this.form;
+            this.createTask(form);
+            // this.reset();
+        },
+        onReset(evt) {
+            evt.preventDefault();
+            // Reset our form values
+            this.reset();
+        },
+        formateDate(arg) {
+            let date = new Date(arg);
+            return date;
+        },
+        reset() {
+            this.form.createionDate = "";
+            this.form.dueDate = "";
+            this.form.description = null;
+            this.form.type = null;
+            this.form.comments = [];
+            this.createionDate = "";
+            this.dueDate = "";
+            this.comment = "";
+            // Trick to reset/clear native browser form validation state
+            this.show = false;
+            this.$nextTick(() => {
+                this.show = true;
+            });
+        },
+        route() {
+            console.log("hit");
+            this.$router.push("/");
+        }
     }
-  }
 };
 </script>
 
 <style scoped>
+
 </style>

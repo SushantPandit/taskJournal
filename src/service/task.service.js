@@ -2,7 +2,9 @@ import axios from 'axios';
 
 export const taskService = {
   getTasks,
-  create
+  create,
+  update,
+  deleteTask
 };
 
 function getTasks(key) {
@@ -33,5 +35,33 @@ function create(taskInfo, key) {
           id: key,
           tasks: [taskInfo]
         })
+    })
+}
+
+function update(taskInfo, key) {
+  return axios
+    .get('http://localhost:3000/task/' + key)
+    .then(res => {
+      return axios
+        .put('http://localhost:3000/task/' + key, {
+          tasks: taskInfo
+        })
+    })
+    .catch(err => {
+      console.log("error in update"+ err);
+    })
+}
+
+function deleteTask(taskInfo, key) {
+  return axios
+    .get('http://localhost:3000/task/' + key)
+    .then(res => {
+      return axios
+        .put('http://localhost:3000/task/' + key, {
+          tasks: taskInfo
+        })
+    })
+    .catch(err => {
+      console.log("error in update"+ err);
     })
 }

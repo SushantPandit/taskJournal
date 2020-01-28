@@ -1,20 +1,20 @@
 <template>
     <div class="createtask container">
         <!-- <b-container fluid class="bv-example-row bg-light">
-                        <b-row class="d-flex pt-3">
-                            <div class="h1 pr-2">
-                                <b-icon icon="arrow-left-short" class="border border-info rounded-lg" v-on:click="route"></b-icon>
-                            </div>
-                            <div class="pl-2">
-                                <p class="h2">Create Task</p>
-                            </div>
-                        </b-row>
-                    </b-container> -->
-        <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+                                                    <b-row class="d-flex pt-3">
+                                                        <div class="h1 pr-2">
+                                                            <b-icon icon="arrow-left-short" class="border border-info rounded-lg" v-on:click="route"></b-icon>
+                                                        </div>
+                                                        <div class="pl-2">
+                                                            <p class="h2">Create Task</p>
+                                                        </div>
+                                                    </b-row>
+                                                </b-container> -->
+        <b-form @submit="onSubmit" v-if="show">
             <b-row>
                 <b-col>
-                    <b-form-group id="input-group-1" label="Creation Date:" label-for="input-1" description="Task created on">
-                        <b-form-input id="input-1" v-model="updateForm.createionDate" type="date" required placeholder="Select date"></b-form-input>
+                    <b-form-group id="input-group-1" label="Creation Date:" label-for="input-1">
+                        <p class="border rounded p-1 text-success">{{createionDate | moment("MMMM Do YYYY")}}</p>
                     </b-form-group>
                 </b-col>
                 <b-col>
@@ -30,7 +30,9 @@
                     </b-form-group>
                 </b-col>
                 <b-col>
-                    <!-- empty -->
+                    <b-form-group id="input-group-3" label="Task Type:" label-for="input-3">
+                        <b-form-select id="input-3" v-model="updateForm.status" :options="status" required></b-form-select>
+                    </b-form-group>
                 </b-col>
             </b-row>
             <b-row>
@@ -59,13 +61,16 @@
                 </b-col>
             </b-row>
             <b-button type="submit" variant="info">Update</b-button>
-            <b-button type="reset" variant="info">Close</b-button>
+            <!-- <b-button type="reset" variant="info">Close</b-button> -->
         </b-form>
     
     </div>
 </template>
 
 <script>
+import moment from 'moment';
+import { mapActions } from 'vuex';
+
 export default {
     name: "UpdateTask",
     data() {
@@ -75,7 +80,8 @@ export default {
                 dueDate: "",
                 description: "",
                 type: null,
-                comments: []
+                comments: [],
+                status:""
             },
             types: [
                 { text: "Select One", value: null },
@@ -84,30 +90,50 @@ export default {
                 "Personal",
                 "Friends"
             ],
+            status: [
+                { text: "Create", value: "Created" },
+                "Pending",
+                "Done"
+            ],
             createionDate: "",
             dueDate: "",
             comment: "",
-            show: true
+            show: true,
         };
     },
     props: {
-        updateRecord:{}
+        updateRecord: {}
     },
-    mounted(){
+    mounted() {
         console.log(this.updateRecord);
         this.updateForm = this.updateRecord.getTasks[this.updateRecord.index];
         console.log(this.updateForm);
-        this.createionDate=this.updateForm.createionDate;
+        this.createionDate = this.format(this.updateForm.createionDate);
+        this.dueDate = this.format(this.updateForm.dueDate);
+        console.log(this.createionDate + " " + this.dueDate);
     },
-    methods:{
-        onSubmit(){
+    methods: {
+        ...mapActions(["updateTask"]),
+        onSubmit() {
+            let form = this.updateForm;
+            form.createionDate = new Date(this.createionDate);
+            form.dueDate = new Date(this.dueDate);
+            if (this.comment) {
+                form.comments.push(this.comment);
+                this.comment = "";
+            }
+            console.log(form);
+            let taskList = this.updateRecord.getTasks;
+
+            taskList.splice(this.updateRecord.index, 1, form);
+            console.log(taskList);
+            this.updateTask({ form, taskList })
 
         },
-        onReset(){
-
-        }
+        format(value) {
+            return moment(value).format("YYYY-MM-DD");
+        },
     }
-
 }
 </script>
 

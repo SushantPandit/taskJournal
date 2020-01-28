@@ -60,14 +60,12 @@ export const task = {
         console.log(error);
       })
     },
-    // createTask({state},args){
-      // console.log(args)
-      // taskService.createTask().then(res=>{
-      //   console.log(res);
-      // }).catch(error=>{
-      //   console.log(error);
-      // })
-    // }
+    deleteTask({state},args){
+      console.log(args);
+      state.tasks.tasks.splice(args,1);
+      console.log(state.key);
+      taskService.deleteTask(state.tasks.tasks,state.key)
+    }
   }
 
 }

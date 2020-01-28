@@ -6,7 +6,9 @@
                     <!-- <img src="" alt="image"> -->
                     <p class="h2">Task</p>
                 </div>
-                <div class="h1 pr-2">
+                <div class="h1 pr-2 d-flex">
+                    <p class="h4 p-2 text-info">Pending</p>
+                    <p class="h4 p-2 text-info">Complited</p>    
                     <b-icon icon="plus" class="border border-info rounded-lg" v-b-modal.create>Create</b-icon>
                 </div>
             </b-row>
@@ -14,12 +16,12 @@
         <b-container>
             <div class="d-flex justify-content-between mt-3 mb-3">
                 <div class="">
-                    <b-icon icon="arrow-left-short" v-on:click="pDate" class="border border-info rounded" font-scale="3"></b-icon>
+                    <b-icon icon="arrow-left-short" v-on:click="pDate" class="border border-info bg-info text-white rounded" font-scale="3"></b-icon>
                     <span class="h2 text-info ml-3">{{currentDate | moment('MMMM Do YYYY , dddd')}}</span>
                 </div>
                 <div class="align-self-end">
                     <!-- <b-icon icon="arrow-left-short" v-on:click="preDate" class="border border-info rounded ml-2" font-scale="2"></b-icon> -->
-                    <b-icon icon="arrow-right-short" v-on:click="nDate" class="border border-info rounded ml-2" font-scale="3"></b-icon>
+                    <b-icon icon="arrow-right-short" v-on:click="nDate" class="border border-info rounded ml-2 bg-info text-white" font-scale="3"></b-icon>
                 </div>
             </div>
         </b-container>
@@ -29,7 +31,7 @@
                     <div class="">
                         <div class="mb-2 d-flex justify-content-between">
                             <span class="h4">{{task.type}}</span>
-                            <b-icon icon="arrows-angle-expand" variant="danger" class="expand" font-scale="1.2"></b-icon>
+                            <b-icon icon="arrows-angle-expand" variant="danger" class="expand" v-on:click="onExpand(i)" font-scale="1.2"></b-icon>
                         </div>
                         <div class="mb-2">
                             <span class="h5 text-info">{{task.description}}</span>
@@ -38,21 +40,22 @@
                             <div class="text-left">
                                 <p class="mb-0 font-weight-bold">Created</p>
                                 <p class=""> {{currentDate | moment("MMMM Do YYYY,dddd")}}</p>
-                                <!-- <p class="mb-0 font-weight-bold">Due Date:</p> -->
-                                <!-- <p class=""> {{task.dueDate | moment("MMMM Do YYYY,ddd")}}</p> -->
                             </div>
                             <div class="text-right">
-                                <!-- <p class="mb-0 font-weight-bold">Created :</p> -->
-                                <!-- <p class=""> {{currentDate | moment("MMMM Do YYYY,ddd")}}</p> -->
                                 <p class="mb-0 font-weight-bold">Due Date</p>
                                 <p class=""> {{task.dueDate | moment("MMMM Do YYYY,dddd")}}</p>
                             </div>
                         </div>
+                        <div class="mb-2" v-if="task.status">
+                            <span class="h6 font-weight-bold">Status:</span>
+                            <span class="h6 text-denger" v-if="task.status==='Pending'">{{task.status}}</span>
+                            <span class="h6 text-success" v-if="task.status!=='Pending'">{{task.status}}</span>
+                        </div>
                     </div>
                     <div class="mt-2 d-flex">
-                        <b-icon icon="check" class="border border-info rounded ml-2" v-on:click="onUpdate(i)" font-scale="2" ></b-icon>
-                        <b-icon icon="document-text" class="border border-info rounded ml-2" font-scale="2"></b-icon>
-                        <b-icon icon="window" class="border border-info rounded ml-2" font-scale="2"></b-icon>
+                        <b-icon icon="check" class="border border-info rounded ml-2" font-scale="2" ></b-icon>
+                        <b-icon icon="document-text" class="border border-info rounded ml-2" v-on:click="onUpdate(i)" font-scale="2"></b-icon>
+                        <b-icon icon="window" class="border border-info rounded ml-2" font-scale="2" v-on:click="onDelete(i)"></b-icon>
                     </div>
                 </b-card>
             </div>
@@ -63,7 +66,9 @@
         <b-modal id="update" title="Update Task" hide-footer>
             <update-task :updateRecord="data" />
         </b-modal>
-    
+        <b-modal id="view" title="View Task" hide-footer>
+            <view-task :viewRecord="data" />
+        </b-modal>    
     </div>
 </template>
 
@@ -71,6 +76,7 @@
 import { mapGetters, mapActions } from "vuex";
 import CreateTask from "./CreateTask";
 import UpdateTask from "./UpdateTask";
+import ViewTask from "./ViewTask";
 
 export default {
     name: "Calender",
@@ -83,16 +89,17 @@ export default {
     },
     components: {
         CreateTask,
-        UpdateTask
+        UpdateTask,
+        ViewTask,
     },
 
     methods: {
-        ...mapActions(["callFunction", "preDate", "nextDate"]),
+        ...mapActions(["callFunction", "preDate", "nextDate","deleteTask"]),
 
         pDate() {
             this.preDate();
             this.currentDate = this.getDate;
-            console.log(this.getTasks);
+            // console.log(this.getTasks);
         },
         nDate() {
             this.nextDate();
@@ -104,13 +111,25 @@ export default {
             this.$router.push("/CreateTask");
         },
         onUpdate(index) {
-            console.log(index);
+            // console.log(index);
             this.data ={
                 index:index,
                 getTasks:this.getTasks
             } 
             this.$bvModal.show('update');
             // this.$refs['update'].show()
+        },
+        onExpand(index){
+            console.log(index);
+            this.data ={
+                index:index,
+                getTasks:this.getTasks
+            } 
+            this.$bvModal.show('view');
+        },
+        onDelete(index){
+            console.log(index+" hit")
+            this.deleteTask(index);
         }
     },
 

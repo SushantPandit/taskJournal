@@ -28,6 +28,12 @@ export const createTask = {
       commit("getKey");
       console.log(state.key);
       taskService.create(args,state.key);
+    },
+    updateTask({state,commit}, args){
+      state.taskData = args.form;
+      commit("getKey");
+      console.log(state.key);
+      taskService.update(args.taskList,state.key);
     }
   }
 
