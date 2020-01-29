@@ -7,8 +7,8 @@
                     <p class="h2">Task</p>
                 </div>
                 <div class="h1 pr-2 d-flex">
-                    <p class="h4 p-2 text-info">Pending</p>
-                    <p class="h4 p-2 text-info">Complited</p>    
+                    <p class="h4 p-2 text-info" v-on:click="route('PendingComponent')">Pending</p>
+                    <p class="h4 p-2 text-info" v-on:click="route('CompletedComponent')">Complited</p>    
                     <b-icon icon="plus" class="border border-info rounded-lg" v-b-modal.create>Create</b-icon>
                 </div>
             </b-row>
@@ -48,7 +48,7 @@
                         </div>
                         <div class="mb-2" v-if="task.status">
                             <span class="h6 font-weight-bold">Status:</span>
-                            <span class="h6 text-denger" v-if="task.status==='Pending'">{{task.status}}</span>
+                            <span class="h6 text-danger" v-if="task.status==='Pending'">{{task.status}}</span>
                             <span class="h6 text-success" v-if="task.status!=='Pending'">{{task.status}}</span>
                         </div>
                     </div>
@@ -61,13 +61,13 @@
             </div>
         </b-container>
         <b-modal id="create" title="Create Task" hide-footer>
-            <create-task/>
+            <create-task @finished="finish('create')"/>
         </b-modal>
         <b-modal id="update" title="Update Task" hide-footer>
-            <update-task :updateRecord="data" />
+            <update-task :updateRecord="data" @finished="finish('update')" />
         </b-modal>
         <b-modal id="view" title="View Task" hide-footer>
-            <view-task :viewRecord="data" />
+            <view-task :viewRecord="data" @finished="finish('view')"/>
         </b-modal>    
     </div>
 </template>
@@ -106,9 +106,9 @@ export default {
             this.currentDate = this.getDate;
             // console.log(this.getTasks);
         },
-        route() {
+        route(arg) {
             console.log("hit");
-            this.$router.push("/CreateTask");
+            this.$router.push("/"+arg);
         },
         onUpdate(index) {
             // console.log(index);
@@ -130,6 +130,9 @@ export default {
         onDelete(index){
             console.log(index+" hit")
             this.deleteTask(index);
+        },
+        finish(arg){
+            this.$bvModal.hide(arg);
         }
     },
 

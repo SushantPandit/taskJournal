@@ -127,7 +127,8 @@ export default {
 
             taskList.splice(this.updateRecord.index, 1, form);
             console.log(taskList);
-            this.updateTask({ form, taskList })
+            this.updateTask({ form, taskList });
+            this.$emit("finished");
 
         },
         format(value) {

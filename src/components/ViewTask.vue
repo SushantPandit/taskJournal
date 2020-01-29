@@ -10,7 +10,7 @@
                                                         </div>
                                                     </b-row>
                                                 </b-container> -->
-        <b-form >
+        <b-form @submit="onSubmit">
             <b-row>
                 <b-col>
                     <b-form-group id="input-group-1" label="Creation Date:" label-for="input-1">
@@ -53,7 +53,7 @@
                     </b-form-group>
                 </b-col>
             </b-row>
-            <!-- <b-button type="submit" variant="info">Update</b-button> -->
+            <b-button type="submit" variant="info">Close</b-button>
             <!-- <b-button type="reset" variant="info">Close</b-button> -->
         </b-form>
     
@@ -84,6 +84,9 @@ export default {
     methods: {
         format(value) {
             return moment(value).format("YYYY-MM-DD");
+        },
+        onSubmit() {
+            this.$emit("finished");
         },
     }
 }

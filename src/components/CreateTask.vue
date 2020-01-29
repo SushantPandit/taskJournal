@@ -104,6 +104,7 @@ export default {
             }
             let form = this.form;
             this.createTask(form);
+            this.$emit("finished");
             // this.reset();
         },
         onReset(evt) {

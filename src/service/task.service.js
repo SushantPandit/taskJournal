@@ -4,7 +4,8 @@ export const taskService = {
   getTasks,
   create,
   update,
-  deleteTask
+  deleteTask,
+  getAllTask
 };
 
 function getTasks(key) {
@@ -63,5 +64,15 @@ function deleteTask(taskInfo, key) {
     })
     .catch(err => {
       console.log("error in update"+ err);
+    })
+}
+function getAllTask(){
+  return axios
+    .get('http://localhost:3000/task')
+    .then(res=>{
+      return res
+    })
+    .catch(err=>{
+      console.log(err);
     })
 }
