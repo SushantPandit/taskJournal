@@ -5,7 +5,8 @@ export const taskService = {
   create,
   update,
   deleteTask,
-  getAllTask
+  getAllTask,
+  getAllType
 };
 
 function getTasks(key) {
@@ -17,11 +18,9 @@ function getTasks(key) {
 }
 
 function create(taskInfo, key) {
-  // console.log('hit')
   return axios
     .get('http://localhost:3000/task/' + key)
     .then(res => {
-      // console.log(res);
       let data = res.data.tasks;
       data.push(taskInfo);
       return axios
@@ -30,11 +29,10 @@ function create(taskInfo, key) {
         })
     })
     .catch(res => {
-      // console.log("create data");
       return axios
         .post('http://localhost:3000/task/', {
-          id: key,
-          tasks: [taskInfo]
+          tasks: [taskInfo],
+          id: key
         })
     })
 }
@@ -68,11 +66,30 @@ function deleteTask(taskInfo, key) {
 }
 function getAllTask(){
   return axios
-    .get('http://localhost:3000/task')
+    .get('http://localhost:3000/task/')
     .then(res=>{
       return res
     })
     .catch(err=>{
       console.log(err);
     })
+}
+
+function getAllType(){
+  return axios
+  .get('http://localhost:3000/type/')
+  .then(res=>{
+    return res;
+  })
+  .catch(err=>{
+    console.log(err);
+  })
+}
+
+function setType(){
+
+}
+
+function setSubType(){
+  
 }

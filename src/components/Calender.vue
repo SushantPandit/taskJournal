@@ -20,7 +20,6 @@
                     <span class="h2 text-info ml-3">{{currentDate | moment('MMMM Do YYYY , dddd')}}</span>
                 </div>
                 <div class="align-self-end">
-                    <!-- <b-icon icon="arrow-left-short" v-on:click="preDate" class="border border-info rounded ml-2" font-scale="2"></b-icon> -->
                     <b-icon icon="arrow-right-short" v-on:click="nDate" class="border border-info rounded ml-2 bg-info text-white" font-scale="3"></b-icon>
                 </div>
             </div>
@@ -94,30 +93,26 @@ export default {
     },
 
     methods: {
-        ...mapActions(["callFunction", "preDate", "nextDate","deleteTask"]),
+        ...mapActions(["callFunction", "preDate", "nextDate","deleteTask","updateAllTask"]),
 
         pDate() {
             this.preDate();
             this.currentDate = this.getDate;
-            // console.log(this.getTasks);
         },
         nDate() {
             this.nextDate();
             this.currentDate = this.getDate;
-            // console.log(this.getTasks);
         },
         route(arg) {
             console.log("hit");
             this.$router.push("/"+arg);
         },
         onUpdate(index) {
-            // console.log(index);
             this.data ={
                 index:index,
                 getTasks:this.getTasks
             } 
             this.$bvModal.show('update');
-            // this.$refs['update'].show()
         },
         onExpand(index){
             console.log(index);
@@ -141,10 +136,9 @@ export default {
     },
 
     mounted() {
+        this.updateAllTask();
         this.callFunction();
         this.currentDate = this.getDate;
-        // this.taskList = this.getTasks;
-        console.log(this.getTasks);
     }
 };
 </script>

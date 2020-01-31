@@ -1,15 +1,15 @@
 <template>
     <div class="createtask container">
         <!-- <b-container fluid class="bv-example-row bg-light">
-                                                    <b-row class="d-flex pt-3">
-                                                        <div class="h1 pr-2">
-                                                            <b-icon icon="arrow-left-short" class="border border-info rounded-lg" v-on:click="route"></b-icon>
-                                                        </div>
-                                                        <div class="pl-2">
-                                                            <p class="h2">Create Task</p>
-                                                        </div>
-                                                    </b-row>
-                                                </b-container> -->
+                                                                <b-row class="d-flex pt-3">
+                                                                    <div class="h1 pr-2">
+                                                                        <b-icon icon="arrow-left-short" class="border border-info rounded-lg" v-on:click="route"></b-icon>
+                                                                    </div>
+                                                                    <div class="pl-2">
+                                                                        <p class="h2">Create Task</p>
+                                                                    </div>
+                                                                </b-row>
+                                                            </b-container> -->
         <b-form @submit="onSubmit" v-if="show">
             <b-row>
                 <b-col>
@@ -20,6 +20,7 @@
                 <b-col>
                     <b-form-group id="input-group-1" label="Due Date:" label-for="input-1" description="">
                         <b-form-input id="input-1" v-model="dueDate" type="date" required placeholder="Select date"></b-form-input>
+                        <p class="h6 text-danger" v-if="dateWarnig">Select correct date.</p>
                     </b-form-group>
                 </b-col>
             </b-row>
@@ -81,7 +82,7 @@ export default {
                 description: "",
                 type: null,
                 comments: [],
-                status:""
+                status: ""
             },
             types: [
                 { text: "Select One", value: null },
@@ -99,18 +100,16 @@ export default {
             dueDate: "",
             comment: "",
             show: true,
+            dateWarnig: false
         };
     },
     props: {
         updateRecord: {}
     },
     mounted() {
-        console.log(this.updateRecord);
         this.updateForm = this.updateRecord.getTasks[this.updateRecord.index];
-        console.log(this.updateForm);
         this.createionDate = this.format(this.updateForm.createionDate);
         this.dueDate = this.format(this.updateForm.dueDate);
-        console.log(this.createionDate + " " + this.dueDate);
     },
     methods: {
         ...mapActions(["updateTask"]),
@@ -118,22 +117,32 @@ export default {
             let form = this.updateForm;
             form.createionDate = new Date(this.createionDate);
             form.dueDate = new Date(this.dueDate);
-            if (this.comment) {
-                form.comments.push(this.comment);
-                this.comment = "";
+            this.dateWarnig = this.dateDiff(form.createionDate, form.dueDate);
+
+            if (!this.dateWarnig) {
+                if (this.comment) {
+                    form.comments.push(this.comment);
+                    this.comment = "";
+                }
+                let taskList = this.updateRecord.getTasks;
+                taskList.splice(this.updateRecord.index, 1, form);
+                this.updateTask({ form, taskList });
+                this.$emit("finished");
             }
-            console.log(form);
-            let taskList = this.updateRecord.getTasks;
-
-            taskList.splice(this.updateRecord.index, 1, form);
-            console.log(taskList);
-            this.updateTask({ form, taskList });
-            this.$emit("finished");
-
         },
         format(value) {
             return moment(value).format("YYYY-MM-DD");
         },
+        dateDiff(date1, date2) {
+            var one_day, date1, date2, diff;
+
+            //Get 1 day in milliseconds
+            one_day = 1000 * 60 * 60 * 24;
+            date1 = date1.getTime();
+            date2 = date2.getTime();
+            diff = (date1 - date2) / one_day;
+            return (diff > 0) ? true : false;
+        }
     }
 }
 </script>

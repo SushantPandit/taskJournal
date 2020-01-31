@@ -1,15 +1,15 @@
 <template>
     <div class="createtask container">
         <!-- <b-container fluid class="bv-example-row bg-light">
-                <b-row class="d-flex pt-3">
-                    <div class="h1 pr-2">
-                        <b-icon icon="arrow-left-short" class="border border-info rounded-lg" v-on:click="route"></b-icon>
-                    </div>
-                    <div class="pl-2">
-                        <p class="h2">Create Task</p>
-                    </div>
-                </b-row>
-            </b-container> -->
+                                                <b-row class="d-flex pt-3">
+                                                    <div class="h1 pr-2">
+                                                        <b-icon icon="arrow-left-short" class="border border-info rounded-lg" v-on:click="route"></b-icon>
+                                                    </div>
+                                                    <div class="pl-2">
+                                                        <p class="h2">Create Task</p>
+                                                    </div>
+                                                </b-row>
+                                            </b-container> -->
         <b-form @submit="onSubmit" @reset="onReset" v-if="show">
             <b-row>
                 <b-col>
@@ -20,7 +20,9 @@
                 <b-col>
                     <b-form-group id="input-group-1" label="Due Date:" label-for="input-1" description="">
                         <b-form-input id="input-1" v-model="dueDate" type="date" required placeholder="Select date"></b-form-input>
+                        <p class="h6 text-danger" v-if="dateWarnig">Select correct date.</p>
                     </b-form-group>
+    
                 </b-col>
             </b-row>
             <b-row>
@@ -58,7 +60,8 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
+import moment from 'moment';
 
 export default {
     name: "CreateTask",
@@ -87,24 +90,31 @@ export default {
             createionDate: "",
             dueDate: "",
             comment: "",
-            show: true
+            show: true,
+            dateWarnig: false
         };
     },
     methods: {
-        ...mapActions(["createTask"]),
+        ...mapActions(["createTask","getType"]),
         onSubmit(evt) {
-            this.form.comments = [];
-            evt.preventDefault();
-            if (this.comment !== "") {
-                this.form.comments.push(this.comment);
-            }
+            // this.form.comments = [];
+            // condition to set the date as time stamp.
             if (this.createionDate && this.dueDate) {
                 this.form.createionDate = this.formateDate(this.createionDate);
                 this.form.dueDate = this.formateDate(this.dueDate);
+                this.dateWarnig = this.dateDiff(this.form.createionDate, this.form.dueDate);
             }
-            let form = this.form;
-            this.createTask(form);
-            this.$emit("finished");
+
+            if (!this.dateWarnig) {
+                console.log('hit in submit');
+                evt.preventDefault();
+                if (this.comment !== "") {
+                    this.form.comments.push(this.comment);
+                }
+                let form = this.form;
+                this.createTask(form);
+                this.$emit("finished");
+            }
         },
         onReset(evt) {
             evt.preventDefault();
@@ -133,7 +143,25 @@ export default {
         route() {
             console.log("hit");
             this.$router.push("/");
+        },
+        dateDiff(date1, date2) {
+            var one_day, date1, date2, diff;
+
+            //Get 1 day in milliseconds
+            one_day = 1000 * 60 * 60 * 24;
+            date1 = date1.getTime();
+            date2 = date2.getTime();
+            diff = (date1 - date2) / one_day;
+            return (diff > 0) ? true : false;
         }
+    },
+    mounted() {
+        this.createionDate = moment(new Date()).format("YYYY-MM-DD");
+        this.getType();
+        console.log(this.getTypes);
+    },
+    computed:{
+        ...mapGetters(["getTypes"])
     }
 };
 </script>

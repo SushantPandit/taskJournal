@@ -19,11 +19,11 @@ export default new Router({
     //   name: 'Calender',
     //   component: Calender
     // },
-    {
-      path: '/CreateTask',
-      name: 'CreateTask',
-      component: CreateTask
-    },
+    // {
+    //   path: '/CreateTask',
+    //   name: 'CreateTask',
+    //   component: CreateTask
+    // },
     {
       path: '/PendingComponent',
       name: 'PendingComponent',

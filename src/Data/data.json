@@ -1,149 +1,30 @@
 {
   "task": [
     {
-      "tasks": [
-        {
-          "createionDate": "2020-01-22T00:00:00.000Z",
-          "dueDate": "2020-01-23T00:00:00.000Z",
-          "description": "xyz",
-          "type": "Project",
-          "comments": [
-            "create task for sushant"
-          ]
-        },
-        {
-          "createionDate": "2020-01-22T00:00:00.000Z",
-          "dueDate": "2020-01-22T00:00:00.000Z",
-          "description": "testing demo data ",
-          "type": "Friends",
-          "comments": [
-            "testing demo data ",
-            "testing demo data ",
-            "testing demo data ",
-            "testing demo data ",
-            "testing demo data "
-          ]
-        },
-        {
-          "createionDate": "2020-01-22T00:00:00.000Z",
-          "dueDate": "2020-01-31T00:00:00.000Z",
-          "description": "xyz",
-          "type": "Family",
-          "comments": [
-            "xyz",
-            "xyz",
-            "xyz",
-            "xyz",
-            "xyz"
-          ]
-        },
-        {
-          "createionDate": "2020-01-22T00:00:00.000Z",
-          "dueDate": "2020-01-22T00:00:00.000Z",
-          "description": "create task for sushant",
-          "type": "Friends",
-          "comments": [
-            "xyz"
-          ]
-        }
-      ],
+      "tasks": [],
       "id": "120022"
     },
     {
-      "tasks": [
-        {
-          "createionDate": "2020-01-24T00:00:00.000Z",
-          "dueDate": "2020-01-06T00:00:00.000Z",
-          "description": "x",
-          "type": "Personal",
-          "comments": [
-            "create task for sushant",
-            "create task"
-          ]
-        },
-        {
-          "createionDate": "2020-01-24T00:00:00.000Z",
-          "dueDate": "2020-01-29T00:00:00.000Z",
-          "description": "xyz",
-          "type": "Personal",
-          "comments": [
-            "xyz"
-          ]
-        },
-        {
-          "createionDate": "2020-01-24T00:00:00.000Z",
-          "dueDate": "2020-01-30T00:00:00.000Z",
-          "description": "xyz",
-          "type": "Personal",
-          "comments": [
-            "xyz"
-          ]
-        }
-      ],
+      "tasks": [],
       "id": "120024"
     },
     {
       "tasks": [
         {
           "createionDate": "2020-01-23T00:00:00.000Z",
-          "dueDate": "2020-01-21T00:00:00.000Z",
+          "dueDate": "2020-01-25T00:00:00.000Z",
           "description": "xyz",
-          "type": "Family",
+          "type": "Project",
           "comments": [
-            "create task for sushant"
-          ]
-        },
-        {
-          "createionDate": "2020-01-23T00:00:00.000Z",
-          "dueDate": "2020-01-21T00:00:00.000Z",
-          "description": "xyz",
-          "type": "Family",
-          "comments": [
-            "create task for sushant"
-          ]
-        },
-        {
-          "createionDate": "2020-01-23T00:00:00.000Z",
-          "dueDate": "2020-01-21T00:00:00.000Z",
-          "description": "xyz",
-          "type": "Family",
-          "comments": [
-            "create task for sushant"
-          ]
+            "xyz"
+          ],
+          "status": "Pending"
         }
       ],
       "id": "120023"
     },
     {
-      "tasks": [
-        {
-          "createionDate": "2020-01-25T00:00:00.000Z",
-          "dueDate": "2020-01-26T00:00:00.000Z",
-          "description": "testing demo data ",
-          "type": "Project",
-          "comments": [
-            "testing demo data "
-          ]
-        },
-        {
-          "createionDate": "2020-01-25T00:00:00.000Z",
-          "dueDate": "2020-01-26T00:00:00.000Z",
-          "description": "testing demo data ",
-          "type": "Project",
-          "comments": [
-            "xyz"
-          ]
-        },
-        {
-          "createionDate": "2020-01-25T00:00:00.000Z",
-          "dueDate": "2020-01-26T00:00:00.000Z",
-          "description": "testing demo data ",
-          "type": "Project",
-          "comments": [
-            "xyz"
-          ]
-        }
-      ],
+      "tasks": [],
       "id": "120025"
     },
     {
@@ -154,9 +35,20 @@
           "description": "xyz",
           "type": "Family",
           "comments": [
-            "xyz"
+            "xyz",
+            "change status"
           ],
-          "status": "Created"
+          "status": "Pending"
+        },
+        {
+          "createionDate": "2020-01-28T00:00:00.000Z",
+          "dueDate": "2020-01-29T00:00:00.000Z",
+          "description": "xyz",
+          "type": "Project",
+          "comments": [
+            "testing demo data "
+          ],
+          "status": "Pending"
         }
       ],
       "id": "120028"
@@ -165,11 +57,12 @@
       "tasks": [
         {
           "createionDate": "2020-01-29T00:00:00.000Z",
-          "dueDate": "2020-01-30T00:00:00.000Z",
+          "dueDate": "2020-01-31T00:00:00.000Z",
           "description": "Attend family function.",
           "type": "Family",
           "comments": [
-            "starts at evening."
+            "starts at evening.",
+            "text"
           ],
           "status": "Pending"
         },
@@ -185,13 +78,13 @@
         },
         {
           "createionDate": "2020-01-29T00:00:00.000Z",
-          "dueDate": "2020-01-31T00:00:00.000Z",
-          "description": "task task task",
+          "dueDate": "2020-01-29T00:00:00.000Z",
+          "description": "testing demo data ",
           "type": "Project",
           "comments": [
-            "testing demo data "
+            "task task task"
           ],
-          "status": "Created"
+          "status": "Pending"
         }
       ],
       "id": "120029"
@@ -222,35 +115,182 @@
       "id": "12008"
     },
     {
-      "id": "120021",
-      "tasks": [
-        {
-          "createionDate": "2020-01-21T00:00:00.000Z",
-          "dueDate": "2020-01-17T00:00:00.000Z",
-          "description": "xyz",
-          "type": "Project",
-          "comments": [
-            "kbjhfdbkgjhbf"
-          ],
-          "status": "Pending"
-        }
-      ]
-    },
-    {
       "tasks": [
         {
           "createionDate": "2020-01-30T00:00:00.000Z",
-          "dueDate": "2020-01-31T00:00:00.000Z",
+          "dueDate": "2020-01-30T00:00:00.000Z",
           "description": "task task task",
           "type": "Project",
           "comments": [
             "task task task",
-            "shoud tak nto phani tommorow"
+            "shoud tak nto phani tommorow",
+            "change due date"
+          ],
+          "status": "Pending"
+        },
+        {
+          "createionDate": "2020-01-30T00:00:00.000Z",
+          "dueDate": "2020-02-01T00:00:00.000Z",
+          "description": "xyz",
+          "type": "Family",
+          "comments": [
+            "xyz"
+          ],
+          "status": "Created"
+        },
+        {
+          "createionDate": "2020-01-30T00:00:00.000Z",
+          "dueDate": "2020-02-13T00:00:00.000Z",
+          "description": "xyz",
+          "type": "Project",
+          "comments": [
+            "testing demo data "
+          ],
+          "status": "Created"
+        },
+        {
+          "createionDate": "2020-01-30T00:00:00.000Z",
+          "dueDate": "2020-01-31T00:00:00.000Z",
+          "description": "xyz",
+          "type": "Project",
+          "comments": [
+            "xyz"
+          ],
+          "status": "Pending"
+        },
+        {
+          "createionDate": "2020-01-30T00:00:00.000Z",
+          "dueDate": "2020-02-01T00:00:00.000Z",
+          "description": "testing demo data ",
+          "type": "Project",
+          "comments": [
+            "task task task"
           ],
           "status": "Created"
         }
       ],
       "id": "120030"
+    },
+    {
+      "tasks": [
+        {
+          "createionDate": "2020-01-21T00:00:00.000Z",
+          "dueDate": "2020-01-24T00:00:00.000Z",
+          "description": "xyz",
+          "type": "Family",
+          "comments": [
+            "xyz"
+          ],
+          "status": "Done"
+        }
+      ],
+      "id": "120021"
+    },
+    {
+      "tasks": [
+        {
+          "createionDate": "2020-01-26T00:00:00.000Z",
+          "dueDate": "2020-01-28T00:00:00.000Z",
+          "description": "xyz",
+          "type": "Project",
+          "comments": [
+            "xyz"
+          ],
+          "status": "Pending"
+        }
+      ],
+      "id": "120026"
+    },
+    {
+      "tasks": [
+        {
+          "createionDate": "2020-01-27T00:00:00.000Z",
+          "dueDate": "2020-01-29T00:00:00.000Z",
+          "description": "xyz",
+          "type": "Family",
+          "comments": [
+            "xyz"
+          ],
+          "status": "Pending"
+        }
+      ],
+      "id": "120027"
+    },
+    {
+      "tasks": [
+        {
+          "createionDate": "2020-01-01T00:00:00.000Z",
+          "dueDate": "2020-01-01T00:00:00.000Z",
+          "description": "testing demo data ",
+          "type": "Project",
+          "comments": [
+            "testing demo data "
+          ],
+          "status": "Pending"
+        }
+      ],
+      "id": "12001"
+    },
+    {
+      "tasks": [
+        {
+          "createionDate": "2020-01-02T00:00:00.000Z",
+          "dueDate": "2020-01-02T00:00:00.000Z",
+          "description": "testing demo data ",
+          "type": "Friends",
+          "comments": [
+            "testing demo data "
+          ],
+          "status": "Pending"
+        }
+      ],
+      "id": "12002"
+    },
+    {
+      "tasks": [
+        {
+          "createionDate": "2020-01-03T00:00:00.000Z",
+          "dueDate": "2020-01-24T00:00:00.000Z",
+          "description": "kbjhfdbkgjhbf",
+          "type": "Family",
+          "comments": [
+            "task task task"
+          ],
+          "status": "Pending"
+        }
+      ],
+      "id": "12003"
+    },
+    {
+      "tasks": [
+        {
+          "createionDate": "2020-01-04T00:00:00.000Z",
+          "dueDate": "2020-01-20T00:00:00.000Z",
+          "description": "task task task",
+          "type": "Family",
+          "comments": [
+            "xxxx"
+          ],
+          "status": "Pending"
+        }
+      ],
+      "id": "12004"
+    }
+  ],
+  "type": [
+    {
+      "id": "Professional",
+      "subType": [
+        "eGov",
+        "Medspack"
+      ]
+    },
+    {
+      "id": "Personal",
+      "subType": [
+        "Friends",
+        "Family"
+      ]
     }
   ]
 }
